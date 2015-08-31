@@ -34,13 +34,18 @@
 					<div class="slider-inner">
 					<?php foreach ( $categories as $category ) { ?>
 						<div class="slide">
-						<?php echo '<img src="' . get_stylesheet_directory_uri() . '/images/placeholder.png"/>'; ?>
-							<?php //if (function_exists('z_taxonomy_image')) : ?>
-								<?php //z_taxonomy_image(NULL, 'oria-carousel'); ?>
-							<?php //else : ?>
-								<?php //echo '<img src="' . get_stylesheet_directory_uri() . '/images/placeholder.png"/>'; ?>
-							<?php //endif; ?>
-							<?php //the_title( sprintf( '<h3 class="slide-title"><a href="%s" rel="bookmark">', get_category_link( $category->term_id ) ), '</a></h3>' ); ?>
+							<?php if (function_exists('z_taxonomy_image')) : ?>
+								<?php if(z_has_taxonomy_image($category->term_id)):  ?>
+									HEY 1
+									<?php z_taxonomy_image($category->term_id, 'oria-carousel'); ?>
+								<?php else : ?>
+									HEY 2
+									<?php echo '<img src="' . get_stylesheet_directory_uri() . '/images/placeholder.png"/>'; ?>
+								<?php endif; ?>
+							<?php else : ?>
+								<?php echo '<img src="' . get_stylesheet_directory_uri() . '/images/placeholder.png"/>'; ?>
+							<?php endif; ?>
+							
 							<?php echo '<h3 class="slide-title"><a href="' . get_category_link( $category->term_id ) . '">' . $category->name . '</a></h3>'; ?>
 						</div>
 					<?php } ?>

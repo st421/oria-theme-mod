@@ -36,10 +36,8 @@
 						<div class="slide">
 							<?php if (function_exists('z_taxonomy_image')) : ?>
 								<?php if(z_has_taxonomy_image($category->term_id)):  ?>
-									HEY 1
 									<?php z_taxonomy_image($category->term_id, 'oria-carousel'); ?>
 								<?php else : ?>
-									HEY 2
 									<?php echo '<img src="' . get_stylesheet_directory_uri() . '/images/placeholder.png"/>'; ?>
 								<?php endif; ?>
 							<?php else : ?>

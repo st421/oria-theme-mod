@@ -1,11 +1,5 @@
 <?php
 /**
- * The main template file.
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package Oria
@@ -29,7 +23,25 @@ if ( have_posts() ) : ?>
 
 <div class="archive-meta"><?php echo category_description(); ?></div>
 
-<?php endif; ?>
+<?php endif; 
+
+$args = array('child_of' => get_cat_id(single_cat_title());
+$categories = get_categories($args);
+<?php foreach ( $categories as $category ) { ?>
+	<div class="slide">
+		<?php if (function_exists('z_taxonomy_image')) : ?>
+			<?php if(z_has_taxonomy_image($category->term_id)):  ?>
+				<?php z_taxonomy_image($category->term_id, 'oria-carousel'); ?>
+					<?php else : ?>
+						<?php echo '<img src="' . get_stylesheet_directory_uri() . '/images/placeholder.png"/>'; ?>
+					<?php endif; ?>
+			<?php else : ?>
+				<?php echo '<img src="' . get_stylesheet_directory_uri() . '/images/placeholder.png"/>'; ?>
+			<?php endif; ?>
+							
+			<?php echo '<h3 class="slide-title"><a href="' . get_category_link( $category->term_id ) . '">' . $category->name . '</a></h3>'; ?>
+	</div>
+<?php } ?>
 
 </header>
 
